@@ -33,15 +33,20 @@ var createTaskEl = function(taskDataObj) {
 
 var addQandA = function() {
     // add h3 for question
-    var questionsAndAnswersEl = document.createElement("div");
-    questionsAndAnswersEl.className = "questions-and-answers";
-    questionsAndAnswersEl.innerHTML = "<h3 class='question'>Commonly used data types DO NOT include:</h3>"
-    //.appendChild(questionAndAnswersEl);
+    var questionBody = document.querySelector("#question-body");
+    var questionEl = document.createElement("div");
+    questionEl.className = "question";
+    questionEl.innerHTML = "<h3 class='question'>Commonly used data types DO NOT include:</h3>"
+    questionBody.appendChild(questionEl);
     // add 4 buttons with different answers to questions
+    var answerEl = document.createElement("div");
+    answerEl.className = "answer";
+    answerEl.innerHTML = "<button class='answer'>Strings</button><button class='answer'>Booleans</button><button class='answer'>Alerts</button><button class='answer'>Numbers</button>"
+    questionBody.appendChild(answerEl);
 };
 
 var changeTime = function() {
-
+    var timer = setInterval(myTimer, 75000);
 };
 
 var startButtonHandler = function() {
