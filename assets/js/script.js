@@ -46,7 +46,19 @@ var addQandA = function() {
 };
 
 var changeTime = function() {
-    var timer = setInterval(myTimer, 75000);
+    var timerEl = document.querySelector("#timer");
+    var timeLeft = 75;
+
+    var timeInterval = setInterval(function() {
+        if (timeLeft > 0) {
+            timerEl.textContent = timeLeft;
+            // subtract `timeLeft` by 1
+            timeLeft--;
+        } else {
+            timerEl.textContent = '';
+            clearInterval(timeInterval);
+        }
+    }, 1000);
 };
 
 var startButtonHandler = function() {
