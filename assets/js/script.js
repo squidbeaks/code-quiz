@@ -56,13 +56,15 @@ const questionBody = document.querySelector("#question-body");
 const codeInstructionsEl = document.querySelector("#code-instructions");
 var timeLeft = 75;
 var currentQuestionIndex = 0;
+var questionEl = document.createElement("div");
+var answerEl = document.createElement("div");
+
 
 const deleteEl = function(El) {
     El.remove();
 };
 
 var addQuestion = function() {
-    var questionEl = document.createElement("div");
     questionEl.id = "question";
     // add h3 for question
     questionEl.className = "question";
@@ -71,10 +73,9 @@ var addQuestion = function() {
 };
 
 var addAnswers = function() {
-    var answerEl = document.createElement("div");
     answerEl.id= "answer";
     // answer buttons
-    answerEl.innerHTML = `<button class='answer' onclick="notification('0')">${questions[currentQuestionIndex].answers.a}</button><button class='answer' onclick="notification('1')">${questions[currentQuestionIndex].answers.b}</button><button class='answer' onclick="notification('2')">${questions[currentQuestionIndex].answers.c}</button><button class='answer' onclick="notification('3')">${questions[currentQuestionIndex].answers.d}</button>`
+    answerEl.innerHTML = `<button class='answer' onclick="notification('a')">${questions[currentQuestionIndex].answers.a}</button><button class='answer' onclick="notification('b')">${questions[currentQuestionIndex].answers.b}</button><button class='answer' onclick="notification('c')">${questions[currentQuestionIndex].answers.c}</button><button class='answer' onclick="notification('d')">${questions[currentQuestionIndex].answers.d}</button>`
     questionBody.appendChild(answerEl);
 };
 
@@ -89,6 +90,8 @@ function notification(answer) {
     }
     questionBody.appendChild(p);
     currentQuestionIndex++;
+    deleteEl(questionEl);
+    deleteEl(answerEl);
     addQuestion();
     addAnswers();
 }
