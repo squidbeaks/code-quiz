@@ -1,19 +1,3 @@
-// const from DOM
-const startButtonEl = document.querySelector("#start-btn");
-const questionBody = document.querySelector("#question-body");
-const codeInstructionsEl = document.querySelector("#code-instructions");
-const questionEl = document.querySelector("#question");
-const answer1El = document.querySelector("#answer1");
-const answer2El = document.querySelector("#answer2");
-const answer3El = document.querySelector("#answer3");
-const answer4El = document.querySelector("#answer4");
-
-var currentQuestionIndex = 0;
-
-const deleteEl = function(El) {
-    El.remove();
-};
-
 var questions = [
     {
         question: "Commonly used data types DO NOT include:",
@@ -67,45 +51,53 @@ var questions = [
     }
 ];
 
+const startButtonEl = document.querySelector("#start-btn");
+const questionBody = document.querySelector("#question-body");
+const codeInstructionsEl = document.querySelector("#code-instructions");
+var timeLeft = 75;
+var currentQuestionIndex = 0;
+
+const deleteEl = function(El) {
+    El.remove();
+};
+
 var addQuestion = function() {
+    var questionEl = document.createElement("div");
+    questionEl.id = "question";
     // add h3 for question
-    var question = document.createElement("h3");
-    question.className = "question";
-    question.innerHTML = questions[0].question;
-    questionEl.appendChild(question);
+    questionEl.className = "question";
+    questionEl.innerHTML = `<h3 class='question'>${questions[currentQuestionIndex].question}</h3>`;
+    questionBody.appendChild(questionEl);
 };
 
 var addAnswers = function() {
-    // answer 1 button
-    var answerEl = document.createElement("button");
-    answerEl.className = "answer";
-    answerEl.innerHTML = questions[0].answers.a
-    answer1El.appendChild(answerEl);
-
-    // answer 2 button
-    var answerEl = document.createElement("button");
-    answerEl.className = "answer";
-    answerEl.innerHTML = questions[0].answers.b
-    answer2El.appendChild(answerEl);
-
-    // answer 3 button
-    var answerEl = document.createElement("button");
-    answerEl.className = "answer";
-    answerEl.innerHTML = questions[0].answers.c
-    answer3El.appendChild(answerEl);
-
-    // answer 4 button
-    var answerEl = document.createElement("button");
-    answerEl.className = "answer";
-    answerEl.innerHTML = questions[0].answers.d
-    answer4El.appendChild(answerEl);
+    var answerEl = document.createElement("div");
+    answerEl.id= "answer";
+    // answer buttons
+    answerEl.innerHTML = `<button class='answer' onclick="notification('0')">${questions[currentQuestionIndex].answers.a}</button><button class='answer' onclick="notification('1')">${questions[currentQuestionIndex].answers.b}</button><button class='answer' onclick="notification('2')">${questions[currentQuestionIndex].answers.c}</button><button class='answer' onclick="notification('3')">${questions[currentQuestionIndex].answers.d}</button>`
+    questionBody.appendChild(answerEl);
 };
 
+function notification(answer) {
+    var p = document.createElement("p");
+    if (answer === questions[currentQuestionIndex].correctAnswer) {
+        console.log(answer);
+        p.innerHTML = "Correct!"
+    } else {
+        p.innerHTML = "Wrong!"
+        timeLeft -= 10;
+    }
+    questionBody.appendChild(p);
+    currentQuestionIndex++;
+    addQuestion();
+    addAnswers();
+}
 
+// stop function when we get to the last question
+// redirect 
 
 const changeTime = function() {
     var timerEl = document.querySelector("#timer");
-    var timeLeft = 75;
 
     var timeInterval = setInterval(function() {
         if (timeLeft > 0) {
@@ -134,18 +126,6 @@ const startButtonHandler = function() {
 startButtonEl.addEventListener("click", startButtonHandler);
 
 // once click answer button
-var clickAnswerButton = function() { 
-    var answerOb = answers.answer
-    answerOb.onclick = function() {
-    // skip to next question
-    if(answerButtonEl.textContent != "Alerts") {
-        // display "Wrong!" notification
-        // reduce time by 15 seconds
-       console.log("Boo!");
-    } else {
-        console.log("Yay!");
-        // display "Correct!" noitification
-    }
-}
-};
+
+var answerButtonEl = document.getElementById('answer3');
 
