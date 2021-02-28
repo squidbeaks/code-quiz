@@ -65,11 +65,13 @@ const deleteEl = function(El) {
 };
 
 var addQuestion = function() {
-    questionEl.id = "question";
-    // add h3 for question
-    questionEl.className = "question";
-    questionEl.innerHTML = `<h3 class='question'>${questions[currentQuestionIndex].question}</h3>`;
-    questionBody.appendChild(questionEl);
+    for (var i=0; i < questions.length; i++) {
+        questionEl.id = "question";
+        // add h3 for question
+        questionEl.className = "question";
+        questionEl.innerHTML = `<h3 class='question'>${questions[currentQuestionIndex].question}</h3>`;
+        questionBody.appendChild(questionEl);
+    };
 };
 
 var addAnswers = function() {
@@ -82,22 +84,18 @@ var addAnswers = function() {
 function notification(answer) {
     var p = document.createElement("p");
     if (answer === questions[currentQuestionIndex].correctAnswer) {
-        console.log(answer);
         p.innerHTML = "Correct!"
     } else {
         p.innerHTML = "Wrong!"
         timeLeft -= 10;
     }
     questionBody.appendChild(p);
-    currentQuestionIndex++;
     deleteEl(questionEl);
     deleteEl(answerEl);
+    currentQuestionIndex++;
     addQuestion();
     addAnswers();
 }
-
-// stop function when we get to the last question
-// redirect 
 
 const changeTime = function() {
     var timerEl = document.querySelector("#timer");
