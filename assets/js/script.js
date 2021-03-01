@@ -54,7 +54,7 @@ var questions = [
 const startButtonEl = document.querySelector("#start-btn");
 const questionBody = document.querySelector("#question-body");
 const codeInstructionsEl = document.querySelector("#code-instructions");
-var timeLeft = 5;
+var timeLeft = 75;
 var currentQuestionIndex = 0;
 var questionEl = document.createElement("div");
 var answerEl = document.createElement("div");
@@ -101,26 +101,23 @@ function notification(answer) {
         addQuestion(questions[currentQuestionIndex].question);
         addAnswers(questions[currentQuestionIndex].answers);
     }
-    if (currentQuestionIndex >= questions.length) {
-        endQuiz();
-    }
 };
 
 const changeTime = function() {
     timeInterval = setInterval(function() {
         if (timeLeft > 0) {
             timerEl.textContent = timeLeft;
+            if (currentQuestionIndex >= questions.length) {
+                endQuiz();
+            }
             timeLeft--;
         }
         else {
+            timeLeft = 0;
             timerEl.textContent = timeLeft;
             endQuiz();
         }
     }, 1000);
-
-    if (timeLeft < 0) {
-        timeLeft = 0
-    }
 };
 
 const startButtonHandler = function() {
@@ -140,7 +137,13 @@ const endQuiz = function() {
     // when questions are out
     // stop clock
     clearInterval(timeInterval);
-    // clear questionBody
+
+    if (timeLeft < 0) {
+        timeLeft = 0;
+    }
+
+    console.log(timeLeft);
+
     questionBody.innerHTML = "";
     // display "<h3>All Done!</h3>"
     const allDone = document.createElement("h3");
@@ -165,16 +168,11 @@ const endQuiz = function() {
     questionBody.appendChild(submit);
 };
 
-
-
-
 const saveScore = function() {
     //leaderBoard = [name, score];
     name = document.getElementById("initials").value;
     score = timeLeft;
-    if (score < 0) {
-        score = 0;
-    }
+
     localStorage.setItem("name", name);
     localStorage.setItem("score", score);
 
@@ -182,17 +180,20 @@ const saveScore = function() {
     //var leaderBoard = JSON.parse(localStorage.getItem('leaderBoard'));
 
     questionBody.innerHTML = "";
-    deleteEl(highScoresEl);
-    deleteEl(timeEl);
     displayScores();
 };
 
 const displayScores = function() {
-    questionBody.innerHTML =
-    `
-    <h2>` + localStorage.getItem("name") + "has the high score of " + localStorage.getItem("score") + `</h2>
-    <button onclick="clearScore()">Clear score!</button><button onclick="resetGame()">Play Again!</button>
-    `;
+    deleteEl(highScoresEl);
+    deleteEl(timeEl);
+    if (localStorage.getItem("score") === null) {
+        questionBody.innerHTML =
+        `<h2>There is no high score yet! Play the game to claim your title!<h2>`;
+    } else {
+        questionBody.innerHTML =
+        `<h2>` + localStorage.getItem("name") + " has the high score of " + localStorage.getItem("score") + `</h2>
+        <button onclick="clearScore()">Clear score!</button><button onclick="resetGame()">Play Again!</button>`;
+    }
 }
 
 const clearScore = function() {
@@ -204,6 +205,13 @@ const clearScore = function() {
 const resetGame = function() {
     location.reload();
 }
+
+const highScoreLink = function () {
+    deleteEl(codeInstructionsEl);
+    displayScores();
+};
+
+highScoresEl.addEventListener("click", highScoreLink);
 
 //GIVEN I am taking a code quiz
 //WHEN I click the start button
