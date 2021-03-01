@@ -191,7 +191,8 @@ const displayScores = function() {
     deleteEl(timerEl);
     if (localStorage.getItem("score") === null) {
         quizBody.innerHTML =
-        `<h2>There is no high score yet! Play the game to claim your title!<h2>`;
+        `<h2>There is no high score yet! Play the game to claim your title!<h2>
+        <button onclick="clearScore()">Clear score!</button><button onclick="resetGame()">Play Again!</button>`;
     } else {
         quizBody.innerHTML =
         `<h2>` + localStorage.getItem("initials") + " has the high score of " + localStorage.getItem("score") + `</h2>
