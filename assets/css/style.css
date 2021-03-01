@@ -1,6 +1,42 @@
 * {
-    background-color: $purple;
-    margin: 50;
-    padding: 50;
-    color: $white;
+    color: #663399;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+button {
+    background-color: #663399;;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+.container div {
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.timer {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.text-areas {
+    text-align: center;
+}
+
+#notification {
+    font-size: 32px;
+}
+
+#all-done {
+    font-size: 32px;
 }

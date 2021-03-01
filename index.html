@@ -6,37 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Code Quiz!</title>
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
   </head>
   <body>
-    <div class="row">
-      <div class="col high-scores">
-        <h4 id="high-scores">High Scores</h4>
+    <div class="container">
+      <div class="high-scores">
+        <h4 id="high-scores">View High Scores</h4>
       </div>
-      <div class="col">
-        <h4 id="time">Timer: <span id="timer">0</span></h4>
+      <div class="timer">
+        <p id="timer">Timer: <span id="countdown">0</span></p>
       </div>
     </div>
     <!--First page content - Start Quiz-->
-        <div id="code-instructions">
-            <div class="row">
-                <div class="col">
+        <div class="text-areas" id="code-instructions">
+            <div>
+                <div>
                     <h2>Coding Quiz Challenge</h2>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
+            <div>
+                <div>
                     <p>
                     Try to answer the following code-related questions within the time
                     limit. Keep in mind that incorrect answers will penalize your
                     score/time by ten seconds!
                     </p>
-                    <button id="start-btn">Start Quiz</button>
+                    <button class="button" id="start-btn">Start Quiz</button>
                 </div>
             </div>
         </div>
-        <div id="question-body">
-
+        <div class="text-areas" id="quiz-body">
         </div>
     <!--Questions-->
     <script src="./assets/js/script.js"></script>
