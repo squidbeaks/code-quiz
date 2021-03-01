@@ -119,7 +119,7 @@ const changeTime = function() {
     }, 1000);
 
     if (timeLeft < 0) {
-        timeLeft === 0
+        timeLeft = 0
     }
 };
 
