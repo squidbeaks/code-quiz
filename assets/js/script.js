@@ -90,6 +90,7 @@ function notification(answer) {
         timeLeft -= 10;
     }
     questionBody.appendChild(p);
+
     deleteEl(questionEl);
     deleteEl(answerEl);
     currentQuestionIndex++;
@@ -106,8 +107,8 @@ const changeTime = function() {
             // subtract `timeLeft` by 1
             timeLeft--;
         } else {
-            timerEl.textContent = '';
-            clearInterval(timeInterval);
+        //  timerEl.textContent = '';
+          //  clearInterval(timeInterval);
             alert('You have run out of time!');
         }
     }, 1000);
@@ -123,10 +124,32 @@ const startButtonHandler = function() {
     changeTime();
 };
 
+const endQuiz = function() {
+    // when questions are out
+    // stop clock
+    if (questions.currentQuestionIndex > questions.length) {
+        clearInterval(changeTime);
+    }
+    // display "<h3>All Done!</h3>"
+    // display "<p> Your final score is ${timeLeft}"
+    // display "Enter initials form and input with submit button"
+   // questionBody.innerHTML = "";
+   // var newTextField = document.createElement("input");
+   // newTextField.id = "initials";
+    // var submit = document.createElement("button");
+   // submit.addEventListener('click', saveScore);
+   // questionBody.appendChild(newTextField);
+  //  questionBody.appendChild(submit);
+};
+
+const saveScore = function() {
+    //var name = document.getElementById("initials").value;
+    //var leaderBoard = JSON.parse(localStorage.getItem('leaderBoard'));
+
+    //leaderBoard = [name, score];
+
+   // localStorage.setItem('leaderBoard', JSON.stringify(leaderBoard));
+};
+
 // click start button
 startButtonEl.addEventListener("click", startButtonHandler);
-
-// once click answer button
-
-var answerButtonEl = document.getElementById('answer3');
-
